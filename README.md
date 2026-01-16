@@ -1,164 +1,136 @@
-🔐 File Encryption & Decryption (Educational Project)
+# 🔐 File Encryption & Decryption (Educational Project)
 
 ⚠️ IMPORTANT WARNING
-This project encrypts and decrypts files directly on disk. Running it without full understanding may result in permanent data loss if the encryption key is lost.
 
-This repository is provided strictly for educational and research purposes, to demonstrate:
+This project encrypts and decrypts files directly on disk.  
+Running it without proper understanding may lead to permanent data loss if the encryption key is lost or corrupted.
 
-symmetric cryptography concepts,
+This repository is provided strictly for educational and research purposes to demonstrate:
+- Symmetric cryptography concepts
+- File system traversal in Python
+- Basic TCP socket communication
 
-file system traversal,
+DO NOT use this code on real systems, personal data, or third-party machines.
 
-basic network communication using sockets.
+---
 
-Do NOT use this code on real systems, personal data, or third-party machines.
+## 📌 Project Overview
 
-📌 Project Overview
+This repository contains two Python scripts that work together:
 
-This project consists of two Python scripts:
+- Encripter → Encrypts files and generates a cryptographic key  
+- Desencripter → Decrypts files using the previously generated key  
 
-Encripter
+Together, they form a controlled lab example to study encryption and decryption workflows.
 
-Recursively scans directories.
+---
 
-Encrypts files using Fernet (symmetric encryption).
+## 📂 Scripts Included
 
-Generates a cryptographic key.
+### 🔒 Encripter (Encryption Script)
 
-Sends the key over a TCP socket.
+Main features:
 
-Logs the encryption timestamp.
+- Recursively scans directories for files
+- Excludes critical project files from encryption
+- Encrypts file contents using cryptography.Fernet
+- Automatically generates a symmetric encryption key
+- Stores the key temporarily in key.key
+- Sends the key over a TCP socket
+- Logs the encryption date and time in encrypt_time.txt
 
-Desencripter
+⚠️ If the key is lost or deleted, encrypted files cannot be recovered.
 
-Reads the previously generated key.
+---
 
-Decrypts encrypted files in the current directory.
+### 🔓 Desencripter (Decryption Script)
 
-Restores original file contents (if the correct key is present).
+Main features:
 
-Together, they form a controlled lab example to study encryption workflows.
+- Scans the current directory for encrypted files
+- Loads the encryption key from key.key
+- Decrypts files using the same Fernet key
+- Restores original file contents only if the correct key is used
 
-📂 Scripts
-🔒 Encripter (Encryption Script)
+If the key is invalid or missing, decryption will fail.
 
-Main responsibilities:
+---
 
-Traverse directories recursively.
+## 🚫 Excluded Files
 
-Skip specific project-related files.
+The following files are intentionally excluded to prevent self-encryption:
 
-Encrypt files using cryptography.Fernet.
+- Encripter.py
+- EncripterLinux.py
+- desencripter.py
+- key.key
+- encrypt_time.txt
 
-Store the encryption key temporarily.
+---
 
-Send the key to a remote host using TCP.
+## 📦 Requirements
 
-Record the execution date and time.
+- Python 3.8+
+- cryptography library
 
-⚠️ If the key is deleted or intercepted incorrectly, files cannot be recovered.
-
-🔓 Desencripter (Decryption Script)
-
-Main responsibilities:
-
-Scan the current directory for encrypted files.
-
-Load the encryption key from key.key.
-
-Decrypt each file using the same Fernet key.
-
-Restore original file content.
-
-If the key does not match, decryption will fail.
-
-📄 Files Excluded From Processing
-
-Both scripts explicitly ignore the following files:
-
-Encripter.py
-
-EncripterLinux.py
-
-desencripter.py
-
-key.key
-
-encrypt_time.txt
-
-This prevents self-encryption and accidental corruption of control files.
-
-📦 Dependencies
-
-Python 3.8+
-
-cryptography
-
-Optional / unused imports may appear in the code but are not required for core functionality.
-
-Install dependencies manually if needed:
+Install dependency:
 
 pip install cryptography
 
-🌐 Network Configuration (Encripter)
+---
 
-The encryption script contains placeholder network values:
+## 🌐 Network Configuration (Encripter)
 
-IP = "192.168.x.xx"
-port = 4444
+The encryption script uses placeholder network values:
 
+IP = "192.168.x.xx"  
+port = 4444  
 
-These values are examples only and should be used exclusively in isolated test environments, such as virtual machines or closed labs.
+These values are examples only and should be used exclusively in isolated test environments such as virtual machines or private labs.
 
-🧪 Safe Usage Guidelines
+---
 
-✔️ Recommended environments:
+## 🧪 Safe Usage Guidelines
 
-Virtual machines
+Recommended:
+- Virtual machines
+- Isolated test folders
+- Files without real value
+- Cybersecurity labs or learning environments
 
-Test folders with disposable files
+Never use on:
+- Your main operating system
+- Personal or important files
+- Computers you do not own
+- Systems without backups
 
-Offline laboratory setups
+---
 
-❌ Never run on:
+## ⚠️ Known Limitations
 
-Your main operating system
+- No file type filtering
+- No user confirmation before encryption
+- Minimal error handling
+- Plain TCP communication (no encryption)
+- Loss of the encryption key results in irreversible data loss
 
-Personal or important data
+---
 
-Other people’s computers
+## 🎓 Educational Purpose
 
-Systems without backups
+This project is designed to help understand:
 
-⚠️ Known Limitations
+- Symmetric encryption (AES via Fernet)
+- File traversal and manipulation in Python
+- Encryption key management risks
+- Importance of backups and secure key handling
+- Why this design should not be used in real-world software
 
-No file type filtering.
+This is not intended as a production-ready encryption tool.
 
-No user confirmation before encryption.
+---
 
-Minimal error handling.
+## ⚖️ Legal Disclaimer
 
-No secure transport layer (plain TCP).
-
-Loss of the key results in irreversible data loss.
-
-🎓 Educational Purpose
-
-This project can be used to learn about:
-
-Symmetric encryption (AES via Fernet)
-
-File system traversal in Python
-
-Risks of automated file modification
-
-Importance of backups and key management
-
-Defensive security awareness
-
-It is not intended as a real-world encryption tool.
-
-⚖️ Legal Disclaimer
-
-This software is provided “as is”, without warranty of any kind.
-The author assumes no responsibility for misuse, data loss, or damage caused by this code.
+This software is provided “as is”, without warranty of any kind.  
+The author assumes no responsibility for misuse, damage, or data loss caused by this code.
