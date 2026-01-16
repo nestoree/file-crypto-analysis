@@ -75,7 +75,9 @@ The following files are intentionally excluded to prevent self-encryption:
 
 Install dependency:
 
+```
 pip install cryptography
+```
 
 ---
 
@@ -83,8 +85,10 @@ pip install cryptography
 
 The encryption script uses placeholder network values:
 
+```
 IP = "192.168.x.xx"  
-port = 4444  
+port = 4444
+```
 
 These values are examples only and should be used exclusively in isolated test environments such as virtual machines or private labs.
 
